@@ -1,20 +1,12 @@
 function FoodChain() {
   this.verse = verse;
+  this.verses = verses;
 }
 
 function verse(num) {
   let songLyrics = '';
   const lyricsObj = new Lyrics(creatureMap[num]);
-  // switch (num) {
-  //   case 1:
-  //     songLyrics = `${lyricsObj.base}${lyricsObj.fly}`;
-  //     break;
-  //   case 2:
-  //     songLyrics = `${lyricsObj.base}${specialLyrics.spider}${lyricsObj.spider}`;
-  //     break;
-  //   default:
-  //     songLyrics = 'Something went wrong';
-  // }
+
   if (typeof specialLyrics[creatureMap[num]] === 'string') {
     songLyrics = `${lyricsObj.base}${specialLyrics[creatureMap[num]]}${lyricsObj[creatureMap[num]]}`;
   } else {
@@ -24,11 +16,18 @@ function verse(num) {
   return songLyrics;
 }
 
-// const lyrics = {
-//   base: 'I know an old lady who swallowed a',
-//   fly: 'I don\'t know why she swallowed the fly. Perhaps she\'ll die.\n',
-//   spider: `She swallowed the spider to catch the fly.\n${fly}`
-// };
+function verses(num1, num2) {
+  let songLyrics = '';
+  for (let i=num1; i<=num2; i++) {
+    const lyricsObj = new Lyrics(creatureMap[i]);
+    if (typeof specialLyrics[creatureMap[i]] === 'string') {
+      songLyrics += `${lyricsObj.base}${specialLyrics[creatureMap[i]]}${lyricsObj[creatureMap[i]]}\n`;
+    } else {
+      songLyrics += `${lyricsObj.base}${lyricsObj[creatureMap[i]]}\n`;
+    }
+  }
+  return songLyrics;
+}
 
 function Lyrics(creature) {
   this.creature = creature;
